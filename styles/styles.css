@@ -8,11 +8,13 @@ h1{
 
 .grid-container {
     display: grid;
-    grid-template-columns: 10rem auto 10rem;
-    grid-template-rows:  10rem 10rem 10rem;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: repeat(6, 200px);
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
     justify-items: center;
-    margin-left: 18rem;
-    margin-right: 18rem;
+    
 }
     
 .form-container {

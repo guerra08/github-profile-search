@@ -55,7 +55,7 @@ function updateWebsite(data){
     document.getElementsByClassName("photo-container")[0].innerHTML=""
 
     avatar.src=data.mainData.avatar_url
-    avatar.style="width: 80%;"
+    avatar.style="width: 50%; border: 5px solid #021a40;"
 
     document.getElementsByClassName("photo-container")[0].appendChild(avatar)
 
