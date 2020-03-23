@@ -1,7 +1,7 @@
 document.getElementById("submit-button").addEventListener("click", () => {
     const dataJson = getDataFromAPI()
     dataJson.then(data => {
-        data === false ? alert("No results found!") : updateWebsite(data)
+        data !== false ? updateWebsite(data) : {}
     })
 })
 
@@ -11,11 +11,17 @@ async function getDataFromAPI(){
 
         const username = usernameField.value.trim()
 
+        if(username == ""){
+            alert("Empty username!")
+            throw "Empty username!"
+        }
+
         const mainDataResponse = await fetch('https://api.github.com/users/'+username)
 
         const reposResponse = await fetch('https://api.github.com/users/'+username+"/repos")
 
         if(mainDataResponse.status !== 200 || reposResponse.status !== 200){
+            alert("No results found!")
             throw "Request resulted 404."
         }
 
@@ -34,6 +40,8 @@ async function getDataFromAPI(){
 }
 
 function updateWebsite(data){
+
+    console.log(data)
 
     document.getElementsByClassName("primary-data")[0].style.visibility="visible"
 
@@ -54,7 +62,7 @@ function updateWebsite(data){
     fullname.innerHTML = "Fullname: " + data.mainData.name
     username.innerHTML = "Username: " + data.mainData.login
     repos.innerHTML = "Repos: " + data.mainData.public_repos
-    followers.innerHTML = "Followers: " + data.mainData.follower
+    followers.innerHTML = "Followers: " + data.mainData.followers
 
     reposContainer.innerHTML="";
 
