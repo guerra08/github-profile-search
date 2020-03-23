@@ -1,8 +1,6 @@
 # github-profile-search
 Simple website for searching a GitHub profile. Uses HTML + CSS + JS
 
-![Imgur](https://i.imgur.com/ECe76Vg.jpg)
-
 Inspired by the ideas and user stories in this repo: https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/GitHub-Profiles.md
 
 # About
