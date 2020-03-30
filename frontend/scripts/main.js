@@ -18,9 +18,23 @@ async function getDataFromAPI(){
             throw "Empty username!"
         }
 
-        const mainDataResponse = await fetch('https://api.github.com/users/'+username)
+        const mainDataResponse = await fetch('http://localhost:3333/profile', 
+            {
+                method: 'GET',
+                body: {
+                    user: username
+                }
+            }
+        )
 
-        const reposResponse = await fetch('https://api.github.com/users/'+username+"/repos")
+        const reposResponse = await fetch('http://localhost:3333/repos', 
+            {
+                method: 'GET',
+                body: {
+                    user: username
+                }
+            }
+        )
 
         if(mainDataResponse.status !== 200 || reposResponse.status !== 200){
             alert("No results found!")
@@ -34,7 +48,6 @@ async function getDataFromAPI(){
     }
     catch(e){
         console.log("Error: " + e)
-        return false
     }
     finally{
         console.log("End of API request.")
@@ -78,9 +91,7 @@ function updateWebsite(data){
         reposTitle.innerHTML = "User repos: "
         reposContainer.appendChild(reposTitle)
 
-        const reposArray = sortAndRetrieveRepos(data.reposData)
-
-        reposArray.forEach(elem => {
+        data.reposData.forEach(elem => {
             const label = document.createElement("label")
             const link = document.createElement("a")
             label.textContent = elem.description
@@ -91,26 +102,4 @@ function updateWebsite(data){
         })
     }
 
-}
-
-function sortAndRetrieveRepos(repos){
-    try{
-        if(!repos){
-            throw "No repos from the user."
-        }
-        repos.sort((a,b) => {
-            if(a.created_at < b.created_at){
-                return 1
-            }
-            if(a.created_at > b.created_at){
-                return -1
-            }
-            return 0
-        })
-        return repos.slice(0,4);
-    }
-    catch(e){
-        console.log("Error: " + e)
-        return false
-    }
 }
