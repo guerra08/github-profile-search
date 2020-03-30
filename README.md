@@ -14,7 +14,7 @@ The page uses a simple grid layout. Currently, it has some empty spaces, but thi
 - [ ] Improve UI/UX
 - [ ] Better JS code
 - [ ] Simplify DOM changes
-
+- [ ] Migrate to a NodeJS backend
 # Codepen
 
 You can check the current status of the latest release in my Codepen!
