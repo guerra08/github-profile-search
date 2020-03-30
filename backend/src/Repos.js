@@ -3,10 +3,11 @@ const axios = require('axios').default
 module.exports = {
     async getRepos(req,res){
         try{
-            const response = await axios.get('https://api.github.com/users/guerra08/repos')
+            const username = req.query.username
+            const response = await axios.get(`https://api.github.com/users/${username}/repos`)
             return res.json(_sortRepos(response.data))
         }catch(err){
-            console.log(err)
+            res.sendStatus(err.response.status)
         }
     }
 }

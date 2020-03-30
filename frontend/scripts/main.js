@@ -8,9 +8,7 @@ document.getElementById("submit-button").addEventListener("click", () => {
 async function getDataFromAPI(){
     try{
         let usernameField = document.getElementById("username-field")
-
         const username = usernameField.value.trim()
-
         usernameField.value = ''
 
         if(username == ""){
@@ -18,33 +16,24 @@ async function getDataFromAPI(){
             throw "Empty username!"
         }
 
-        const mainDataResponse = await fetch('http://localhost:3333/profile', 
+        const mainDataResponse = await fetch(`http://localhost:3333/profile?username=${username}`, 
             {
-                method: 'GET',
-                body: {
-                    user: username
-                }
+                method: 'GET'
             }
         )
 
-        const reposResponse = await fetch('http://localhost:3333/repos', 
+        const reposResponse = await fetch(`http://localhost:3333/repos?username=${username}`, 
             {
-                method: 'GET',
-                body: {
-                    user: username
-                }
+                method: 'GET'
             }
         )
 
         if(mainDataResponse.status !== 200 || reposResponse.status !== 200){
             alert("No results found!")
-            throw "Request resulted 404."
+            return false;
         }
-
-        const mainData = await mainDataResponse.json()
-        const reposData = await reposResponse.json();
         
-        return {mainData: mainData, reposData: reposData}
+        return {mainData: await mainDataResponse.json(), reposData: await reposResponse.json()}
     }
     catch(e){
         console.log("Error: " + e)
@@ -55,8 +44,6 @@ async function getDataFromAPI(){
 }
 
 function updateWebsite(data){
-
-    console.log(data)
 
     document.getElementsByClassName("primary-data")[0].style.visibility="visible"
 
