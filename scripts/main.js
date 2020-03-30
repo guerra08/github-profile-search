@@ -11,6 +11,8 @@ async function getDataFromAPI(){
 
         const username = usernameField.value.trim()
 
+        usernameField.value = ''
+
         if(username == ""){
             alert("Empty username!")
             throw "Empty username!"
@@ -55,7 +57,7 @@ function updateWebsite(data){
     document.getElementsByClassName("photo-container")[0].innerHTML=""
 
     avatar.src=data.mainData.avatar_url
-    avatar.style="width: 50%; border: 5px solid #021a40;"
+    avatar.style="width: 65%; border: 5px solid #021a40;"
 
     document.getElementsByClassName("photo-container")[0].appendChild(avatar)
 
@@ -79,10 +81,13 @@ function updateWebsite(data){
         const reposArray = sortAndRetrieveRepos(data.reposData)
 
         reposArray.forEach(elem => {
+            const label = document.createElement("label")
             const link = document.createElement("a")
+            label.textContent = elem.description
             link.text = elem.name
             link.href = elem.svn_url
             reposContainer.appendChild(link)
+            reposContainer.appendChild(label)
         })
     }
 
