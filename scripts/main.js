@@ -1,30 +1,40 @@
-document.getElementById("submit-button").addEventListener("click", () => {
+const submitButton = document.getElementById("submit-button")
+const usernameField = document.getElementById("username-field")
+
+submitButton.addEventListener("click", () => {
+    executeBulk()
+})
+usernameField.addEventListener("keyup", (e) => {
+    (e.keyCode === 13) ? executeBulk() : {}
+})
+
+function executeBulk(){
     const dataJson = getDataFromAPI()
     dataJson.then(data => {
         data !== false ? updateWebsite(data) : {}
     })
-})
+}
 
 async function getDataFromAPI(){
     try{
-        let usernameField = document.getElementById("username-field")
+
+        checkUsername()
 
         const username = usernameField.value.trim()
 
         usernameField.value = ''
 
-        if(username == ""){
-            alert("Empty username!")
-            throw "Empty username!"
-        }
+        const mainDataResponse = await fetch(`https://api.github.com/users/${username}`, {
+            mode: 'cors'
+        })
 
-        const mainDataResponse = await fetch('https://api.github.com/users/'+username)
-
-        const reposResponse = await fetch('https://api.github.com/users/'+username+"/repos")
+        const reposResponse = await fetch(`https://api.github.com/users/${username}/repos`, {
+            mode: 'cors'
+        })
 
         if(mainDataResponse.status !== 200 || reposResponse.status !== 200){
             alert("No results found!")
-            throw "Request resulted 404."
+            throw "Error while processing request."
         }
 
         const mainData = await mainDataResponse.json()
@@ -33,7 +43,7 @@ async function getDataFromAPI(){
         return {mainData: mainData, reposData: reposData}
     }
     catch(e){
-        console.log("Error: " + e)
+        console.log(`Error: ${e}`)
         return false
     }
     finally{
@@ -42,8 +52,6 @@ async function getDataFromAPI(){
 }
 
 function updateWebsite(data){
-
-    console.log(data)
 
     document.getElementsByClassName("primary-data")[0].style.visibility="visible"
 
@@ -54,28 +62,28 @@ function updateWebsite(data){
     const followers = document.getElementById("followers")
     const reposContainer = document.getElementsByClassName("repos-container")[0]
 
-    document.getElementsByClassName("photo-container")[0].innerHTML=""
+    document.getElementsByClassName("photo-container")[0].innerHTML = ''
 
     avatar.src=data.mainData.avatar_url
     avatar.style="width: 65%; border: 5px solid #021a40;"
 
     document.getElementsByClassName("photo-container")[0].appendChild(avatar)
 
-    fullname.innerHTML = "Fullname: " + data.mainData.name
-    username.innerHTML = "Username: " + data.mainData.login
-    repos.innerHTML = "Repos: " + data.mainData.public_repos
-    followers.innerHTML = "Followers: " + data.mainData.followers
+    fullname.innerHTML = `Fullname: ${data.mainData.name}`
+    username.innerHTML = `Username: ${data.mainData.login}`
+    repos.innerHTML = `Repos: ${data.mainData.public_repos}`
+    followers.innerHTML = `Followers: ${data.mainData.followers}`
 
-    reposContainer.innerHTML="";
+    reposContainer.innerHTML= '';
 
     const reposTitle = document.createElement("p")
 
     if(data.mainData.public_repos == 0){
-        reposTitle.innerHTML = "User has 0 repos."
+        reposTitle.innerHTML = 'User has 0 public repos.'
         reposContainer.appendChild(reposTitle)
     }
     else{
-        reposTitle.innerHTML = "User repos: "
+        reposTitle.innerHTML = 'User repos: '
         reposContainer.appendChild(reposTitle)
 
         const reposArray = sortAndRetrieveRepos(data.reposData)
@@ -110,7 +118,14 @@ function sortAndRetrieveRepos(repos){
         return repos.slice(0,4);
     }
     catch(e){
-        console.log("Error: " + e)
+        console.log(`Error: ${e}`)
         return false
     }
+}
+
+function checkUsername(){
+    if(usernameField.value === ''){
+        alert("Empty username!")
+        throw "Empty username!"
+    }    
 }
