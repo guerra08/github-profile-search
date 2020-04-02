@@ -17,5 +17,6 @@ https://github-profile-search-272901.web.app/
 # Future steps
 
 - [ ] Improve UI/UX
+- [ ] Dark Mode
 - [ ] Better JS code
 - [ ] Simplify DOM changes
