@@ -1,15 +1,16 @@
+:root {
+    --bg: #E4E4E4;
+    --color: #2B2B2D;
+}
+
 * {
     font-family: "Work Sans", sans-serif;
     font-size: 18px;
 }
 
 body{
-    background-color: #E4E4E4;
-}
-
-.dark{
-    background-color: #2B2B2D;
-    color: #E4E4E4;
+    background-color: var(--bg);
+    color: var(--color);
 }
 
 h1 {
@@ -54,6 +55,14 @@ a + label {
     opacity: 0;
     transform: translateX(0);
     transition: all 0.2s ease-out;
+}
+
+a:link {
+    color: var(--color);
+}
+
+a:visited {
+    color: var(--color);
 }
 
 a:hover + label {

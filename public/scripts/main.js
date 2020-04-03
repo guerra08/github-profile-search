@@ -1,6 +1,7 @@
 const submitButton = document.getElementById("submit-button")
 const usernameField = document.getElementById("username-field")
 const darkToggle = document.getElementById("dark-toggle")
+let root = document.documentElement;
 
 submitButton.addEventListener("click", () => {
     executeBulk()
@@ -21,12 +22,14 @@ function executeBulk(){
 
 function darkOn(){
     darkToggle.value = "D"
-    document.body.className = "dark"
+    root.style.setProperty('--bg', "#2B2B2D");
+    root.style.setProperty('--color', "#E4E4E4");
 }
 
 function lightOn(){
     darkToggle.value = "L"
-    document.body.className = ""
+    root.style.setProperty('--color', "#2B2B2D");
+    root.style.setProperty('--bg', "#E4E4E4");
 }
 
 async function getDataFromAPI(){
