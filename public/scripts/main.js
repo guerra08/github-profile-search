@@ -1,5 +1,6 @@
 const submitButton = document.getElementById("submit-button")
 const usernameField = document.getElementById("username-field")
+const darkToggle = document.getElementById("dark-toggle")
 
 submitButton.addEventListener("click", () => {
     executeBulk()
@@ -7,12 +8,25 @@ submitButton.addEventListener("click", () => {
 usernameField.addEventListener("keyup", (e) => {
     (e.keyCode === 13) ? executeBulk() : {}
 })
+darkToggle.addEventListener("click", () => {
+    (darkToggle.value === "L") ? darkOn() : lightOn()
+})
 
 function executeBulk(){
     const dataJson = getDataFromAPI()
     dataJson.then(data => {
         data !== false ? updateWebsite(data) : {}
     })
+}
+
+function darkOn(){
+    darkToggle.value = "D"
+    document.body.className = "dark"
+}
+
+function lightOn(){
+    darkToggle.value = "L"
+    document.body.className = ""
 }
 
 async function getDataFromAPI(){

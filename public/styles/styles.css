@@ -3,9 +3,18 @@
     font-size: 18px;
 }
 
+body{
+    background-color: #E4E4E4;
+}
+
+.dark{
+    background-color: #2B2B2D;
+    color: #E4E4E4;
+}
+
 h1 {
-    text-align: center;
     font-size: 30px;
+    text-align: center;
 }
 
 input {
@@ -38,7 +47,7 @@ input:placeholder-shown + label {
     transform: translateY(1rem);
 }
 
-a + label{
+a + label {
     display: block;
     position: relative;
     top: 0;
@@ -47,7 +56,7 @@ a + label{
     transition: all 0.2s ease-out;
 }
 
-a:hover + label{
+a:hover + label {
     opacity: 1;
     transform: translateX(1rem);
 }
@@ -57,7 +66,7 @@ button:hover {
     color: white;
 }
 
-.main-data{
+.main-data {
     display: flex;
     align-items: center;
     margin-bottom: 2em;
@@ -73,7 +82,7 @@ button:hover {
     visibility: hidden;
 }
 
-.repos-container{
+.repos-container {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -81,7 +90,7 @@ button:hover {
     justify-content: space-around;
 }
 
-.repos-container a{
+.repos-container a {
     margin: 10px;
 }
 
@@ -98,13 +107,77 @@ button:hover {
     text-align: center;
 }
 
-@media (max-width: 1024px) {
+.switch-container {
+   display: flex;
+   flex-direction: row-reverse;
+   text-align: center;
+   margin-right: 24px;
+}
 
+.switch {
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: grey;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px grey;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+@media (max-width: 1024px) {
     .form-container {
         width: 80%;
     }
 
-    a + label{
+    a + label {
         display: block;
         position: relative;
         opacity: 1;
