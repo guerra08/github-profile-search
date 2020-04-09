@@ -1,6 +1,7 @@
-const submitButton = document.getElementById("submit-button")
-const usernameField = document.getElementById("username-field")
-const darkToggle = document.getElementById("dark-toggle")
+const submitButton = document.querySelector("#submit-button")
+const usernameField = document.querySelector("#username-field")
+const darkToggle = document.querySelector("#dark-toggle")
+const themeName = document.querySelector('#theme-name')
 let root = document.documentElement;
 
 submitButton.addEventListener("click", () => {
@@ -21,12 +22,14 @@ function executeBulk(){
 }
 
 function darkOn(){
+    themeName.innerHTML = "Switch to light"
     darkToggle.value = "D"
     root.style.setProperty('--bg', "#2B2B2D");
     root.style.setProperty('--color', "#E4E4E4");
 }
 
 function lightOn(){
+    themeName.innerHTML = "Switch to dark"
     darkToggle.value = "L"
     root.style.setProperty('--color', "#2B2B2D");
     root.style.setProperty('--bg', "#E4E4E4");
