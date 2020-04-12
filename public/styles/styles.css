@@ -189,6 +189,32 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 1024px) {
+    .switch{
+        width: 30px;
+        height: 17px;
+    }
+
+    .switch-container{
+        margin-left: auto;
+    }
+
+    .slider:before {
+        height: 13px;
+        width: 13px;
+        left: 2px;
+        bottom: 2px;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(13px);
+        -ms-transform: translateX(13px);
+        transform: translateX(13px);
+    }
+
+    .switch-container p {
+        font-size: 14px;
+    }
+
     .form-container {
         width: 80%;
     }
