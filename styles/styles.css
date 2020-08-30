@@ -121,13 +121,15 @@ button:hover {
     display: flex;
     flex-direction: row-reverse;
     text-align: center;
-    margin-right: 32px;
+    margin-right: 16px;
     justify-items: center;
     align-items: center;
 }
 
 .switch-container p{
-    margin-right: 16px;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
 }
 
 .switch {
@@ -195,7 +197,8 @@ input:checked + .slider:before {
     }
 
     .switch-container{
-        margin-left: auto;
+        margin: 0;
+        padding: 0;
     }
 
     .slider:before {
@@ -212,7 +215,7 @@ input:checked + .slider:before {
     }
 
     .switch-container p {
-        font-size: 14px;
+        font-size: 1.5rem;
     }
 
     .form-container {
