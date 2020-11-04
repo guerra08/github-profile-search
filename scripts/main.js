@@ -60,10 +60,10 @@ async function getDataFromAPI(){
     }
     catch(e){
         console.log(`Error: ${e}`)
-        return false
+        return false;
     }
     finally{
-        console.log("End of API request.")
+        console.log("End of API request.");
     }
 }
 
@@ -71,11 +71,11 @@ function updateWebsite(data){
 
     document.getElementsByClassName("primary-data")[0].style.visibility="visible"
 
-    const fullname = document.getElementById("fullname")
-    const username = document.getElementById("username")
-    const avatar = document.createElement("img")
-    const repos = document.getElementById("repos")
-    const followers = document.getElementById("followers")
+    const fullname = document.getElementById("fullname");
+    const username = document.getElementById("username");
+    const avatar = document.createElement("img");
+    const repos = document.getElementById("repos");
+    const followers = document.getElementById("followers");
     const reposContainer = document.getElementsByClassName("repos-container")[0]
 
     document.getElementsByClassName("photo-container")[0].innerHTML = ''
@@ -129,13 +129,13 @@ function sortAndRetrieveRepos(repos){
             if(a.created_at > b.created_at){
                 return -1
             }
-            return 0
+            return 0;
         })
         return repos.slice(0,4);
     }
     catch(e){
         console.log(`Error: ${e}`)
-        return false
+        return false;
     }
 }
 
